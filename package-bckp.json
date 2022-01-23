@@ -1,0 +1,94 @@
+{
+  "name": "parcel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel src/index.js",
+    "build": "npm-run-all --parallel build:**",
+    "build:constructor": "parcel build src/scripts/constructor/index.js --out-dir dist --out-file constructor.js",
+    "build:channels": "parcel build src/scripts/channels/index.js --out-dir dist --out-file channels.js",
+    "build:main": "parcel build src/scripts/main/index.js --out-dir dist --out-file index.js",
+    "build:styles": "parcel build src/styles/main.css --out-dir dist --out-file main.css --public-url ../"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.14.0",
+    "@babel/plugin-transform-runtime": "^7.13.15",
+    "@babel/runtime-corejs2": "^7.9.2",
+    "autoprefixer": "^9.7.1",
+    "npm-run-all": "^4.1.5",
+    "parcel-bundler": "^1.12.5",
+    "parcel-plugin-custom-dist-structure": "^1.1.17",
+    "parcel-plugin-static-files-copy": "^2.6.0",
+    "sass": "^1.32.12"
+  },
+  "dependencies": {
+    "postcss-modules": "^1.4.1"
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {
+        "overrideBrowserslist": [
+          "> 1%",
+          "last 4 versions",
+          "ie >= 9"
+        ]
+      }
+    }
+  },
+  "babel": {
+    "plugins": [
+      [
+        "@babel/plugin-transform-runtime",
+        {
+          "corejs": 2,
+          "regenerator": true
+        }
+      ]
+    ]
+  },
+  "cssnano": {
+    "preset": [
+      "default",
+      {
+        "minifyFontValues": {
+          "removeQuotes": false
+        },
+        "normalizeUrl": false
+      }
+    ]
+  },
+  "staticFiles": {
+    "staticPath": [
+      {
+        "staticPath": "static/images",
+        "staticOutDir": "images"
+      }
+    ]
+  },
+  "customDistStructure": {
+    "config": {
+      ".css": "styles",
+      ".css.map": "styles",
+      ".js": "scripts",
+      ".js.map": "scripts",
+      ".ttf": "fonts",
+      "images": [
+        ".jpg",
+        ".png",
+        ".svg",
+        ".gif",
+        ".ttf",
+        ".bmp"
+      ],
+      ".fileExtension": "folder/in/dist",
+      "folder/in/dist": [
+        ".file",
+        ".extensions"
+      ]
+    }
+  }
+}
